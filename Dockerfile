@@ -1,6 +1,7 @@
 FROM alpine:latest
-RUN apk add --no-cache --virtual .build-deps ca-certificates curl unzip
+ENV PORT=443
+ENV ID=472523ae-a4a7-42d9-92a1-e302ddba9757
+RUN apk add --no-cache ca-certificates curl unzip bash
 ADD configure.sh /configure.sh
 RUN chmod +x /configure.sh
-CMD /configure.sh
-RUN apk del .build-deps
+CMD ["/configure.sh"]
