@@ -35,4 +35,7 @@ cat << EOF > /usr/local/etc/v2ray/config.json
   ]
 }
 EOF
-/usr/local/bin/v2ray run -c /usr/local/etc/v2ray/config.json
+# Start V2Ray in background
+/usr/local/bin/v2ray run -c /usr/local/etc/v2ray/config.json &
+# Start lightweight HTTP server on port 8080 for keep-alive pings
+cd /tmp && python3 -m http.server 8080
