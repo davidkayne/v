@@ -4,7 +4,6 @@ TMP_DIR=$(mktemp -d)
 curl -L -H "Cache-Control: no-cache" -o "$TMP_DIR/v2ray.zip" https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip
 unzip "$TMP_DIR/v2ray.zip" -d "$TMP_DIR"
 install -m 755 "$TMP_DIR/v2ray" /usr/local/bin/v2ray
-install -m 755 "$TMP_DIR/v2ctl" /usr/local/bin/v2ctl
 rm -rf "$TMP_DIR"
 install -d /usr/local/etc/v2ray
 cat << EOF > /usr/local/etc/v2ray/config.json
