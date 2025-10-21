@@ -1,8 +1,13 @@
-FROM alpine:latest
+FROM python:3.11-alpine
 ENV PORT=443
 ENV ID=472523ae-a4a7-42d9-92a1-e302ddba9757
-RUN apk add --no-cache ca-certificates curl unzip bash python3 wget
-ADD configure.sh /configure.sh
+
+RUN apk add --no-cache curl unzip bash ca-certificates \
+    && pip install flask gunicorn
+
+COPY configure.sh /configure.sh
+COPY app.py /app.py
 RUN chmod +x /configure.sh
-HEALTHCHECK --interval=10s --timeout=3s CMD wget -qO- http://127.0.0.1:8080 || exit 1
+
+EXPOSE 443 8080
 CMD ["/configure.sh"]
